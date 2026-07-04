@@ -1,0 +1,23 @@
+{
+  "name": "Invoice-BE",
+  "packageManager": "yarn@4.14.1",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.0",
+    "eslint": "^10.6.0",
+    "prettier": "^3.9.4",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
+  }
+}
