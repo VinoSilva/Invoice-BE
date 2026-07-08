@@ -5,6 +5,9 @@
 !.yarn/sdks
 !.yarn/versions
 
+dist
+
+.env*
 .env
 
 # Whether you use PnP or not, the node_modules folder is often used to store
