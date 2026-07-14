@@ -12,5 +12,6 @@ export default defineConfig({
     // Force tests to run sequentially to avoid transaction collisions
     // when using the same database connection pool
     fileParallelism: false,
+    exclude: ['node_modules', 'dist'],
   },
 });

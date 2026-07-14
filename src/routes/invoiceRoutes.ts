@@ -1,35 +1,31 @@
-// Import libraries
-import { z } from 'zod';
 import { Router } from 'express';
-
-// Import middlewares
+import { z } from 'zod';
 import { validate } from '../middlewares/validate';
-
-// Import controllers
-import {
-  createInvoice,
-  getInvoices,
-  getInvoiceById,
-  updateInvoice,
-  deleteInvoice,
-} from '../controllers/invoice.controller';
-
-// Import schemas
-import { insertInvoiceSchema, invoiceIdParam } from '../schema/invoice.zod';
+import { insertInvoiceSchema, invoiceIdParam } from '../domain/invoice.schema';
+import { InvoiceRepository } from '../repositories/invoice.repository';
+import { InvoiceService } from '../services/invoice.service';
+import { InvoiceController } from '../controllers/invoice.controller';
 
 const router = Router();
+
+const repository = new InvoiceRepository();
+const service = new InvoiceService(repository);
+const controller = new InvoiceController(service);
 
 router.post(
   '/',
   validate(z.object({ body: insertInvoiceSchema })),
-  createInvoice,
+  controller.createInvoice,
 );
-router.get('/', getInvoices);
+
+router.get('/', controller.getAllInvoices);
+
 router.get(
   '/:id',
   validate(z.object({ params: invoiceIdParam })),
-  getInvoiceById,
+  controller.getInvoiceById,
 );
+
 router.put(
   '/:id',
   validate(
@@ -38,12 +34,13 @@ router.put(
       body: insertInvoiceSchema.partial(),
     }),
   ),
-  updateInvoice,
+  controller.updateInvoice,
 );
+
 router.delete(
   '/:id',
   validate(z.object({ params: invoiceIdParam })),
-  deleteInvoice,
+  controller.deleteInvoice,
 );
 
 export default router;

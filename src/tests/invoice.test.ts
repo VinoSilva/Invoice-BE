@@ -46,7 +46,11 @@ describe('Invoice API Integration Tests', () => {
   });
 
   it('should fetch an invoice by ID', async () => {
+    console.log('Test Invoice ID:' + testInvoiceId);
+
     const response = await request(app).get(`/api/invoices/${testInvoiceId}`);
+
+    console.log(response.body);
 
     expect(response.status).toBe(200);
     expect(response.body.from).toBe('Test Corp');
